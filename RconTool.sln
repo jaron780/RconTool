@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RconTool Simplified", "RconTool\RconTool Simplified.csproj", "{3BB0456E-8939-4AD2-A6CB-962E5512E76B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Build|Any CPU = Build|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		Testing|Any CPU = Testing|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3BB0456E-8939-4AD2-A6CB-962E5512E76B}.Build|Any CPU.ActiveCfg = Build|Any CPU
+		{3BB0456E-8939-4AD2-A6CB-962E5512E76B}.Build|Any CPU.Build.0 = Build|Any CPU
+		{3BB0456E-8939-4AD2-A6CB-962E5512E76B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BB0456E-8939-4AD2-A6CB-962E5512E76B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BB0456E-8939-4AD2-A6CB-962E5512E76B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BB0456E-8939-4AD2-A6CB-962E5512E76B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BB0456E-8939-4AD2-A6CB-962E5512E76B}.Testing|Any CPU.ActiveCfg = Testing|Any CPU
+		{3BB0456E-8939-4AD2-A6CB-962E5512E76B}.Testing|Any CPU.Build.0 = Testing|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {986067FA-B9B5-4893-97D6-5658A95863DA}
+	EndGlobalSection
+EndGlobal
