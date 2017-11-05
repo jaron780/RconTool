@@ -591,7 +591,10 @@ namespace RconTool
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             Graphics graphics = e.Graphics;
-
+            if(currentConnection == null)
+            {
+                return;
+            }
             List<Team> teams = currentConnection.server.prevteamlist;
 
             System.Drawing.Rectangle name = new System.Drawing.Rectangle(0, 25, 180, 20);
