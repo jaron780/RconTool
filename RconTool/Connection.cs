@@ -17,6 +17,7 @@ namespace RconTool
 
         private string laststatus;
         public Thread StatsThread;
+        public Thread RconThread;
         public Boolean visable = false;
         
         public Connection(Form1 form,string ip, string rconport, string infoport, string rconpassword)
@@ -24,7 +25,10 @@ namespace RconTool
             this.form = form;
             this.serverinfo = new ServerInfo(ip, infoport, rconpassword, rconport);
             server = new Server();
-            StartConnection();
+
+            RconThread = new Thread(new ThreadStart(StartConnection));
+            RconThread.Start();
+            
             if (!Form1.connectionList.Contains(this))
             {
                 Form1.connectionList.Add(this);
@@ -48,7 +52,10 @@ namespace RconTool
             this.form = form;
             this.serverinfo = serverinfo;
             server = new Server();
-            StartConnection();
+
+            RconThread = new Thread(new ThreadStart(StartConnection));
+            RconThread.Start();
+
             if (!Form1.connectionList.Contains(this))
             {
                 Form1.connectionList.Add(this);
@@ -197,7 +204,16 @@ namespace RconTool
 
         public void SendToRcon(string cmd)
         {
-            serverConnection.Command(cmd);
+            new Thread(delegate () {
+                serverConnection.Command(cmd);
+            }).Start();
+        }
+
+        public void sendToChat(string cmd)
+        {
+            new Thread(delegate () {
+                serverConnection.Command("Server.say \"" + cmd + "\"");
+            }).Start();
         }
 
         public void GetStats()

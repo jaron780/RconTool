@@ -58,15 +58,10 @@ namespace EldoritoRcon
         private void Ws_OnClose(object sender, CloseEventArgs e)
         {
             if (ServerMessage != null)
+            {
                 ServerClose(this, e.Code);
-        }
-
-        public void Chat(string message)
-        {
-            if (!ws.IsAlive)
                 Restart();
-
-            ws.Send(Encoding.ASCII.GetBytes("server.say \"" + message + "\""));
+            }
         }
 
         public void Command(string cmd)

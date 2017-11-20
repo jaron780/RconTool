@@ -356,6 +356,17 @@ namespace RconTool
                     }
                     else
                     {
+                        SetLabelText(ServerName, "Name: ");
+                        SetLabelText(Host, "Host: ");
+                        SetLabelText(SprintEnabled, "Sprint Enabled: ");
+                        SetLabelText(Assassinations, "Assassinations: ");
+                        SetLabelText(voip, "VoIP: ");
+                        SetLabelText(map, "Map: ");
+                        SetLabelText(variant, "Variant: ");
+                        SetLabelText(varianttype, "Variant Type: ");
+                        SetLabelText(status, "Status: ");
+                        SetLabelText(players, "Players: 0/0");
+                        SetLabelText(version, "Version: ");
                         toolStripStatusLabel3.Text = "Stats: false";
                     }
 
@@ -458,7 +469,7 @@ namespace RconTool
         {
             if (sendChat)
             {
-                currentConnection.serverConnection.Chat(textBox1.Text);
+                currentConnection.sendToChat(textBox1.Text);
                 textBox1.Clear();
             }
             else
@@ -653,7 +664,8 @@ namespace RconTool
                         Color textcolor = Color.White;
                         System.Drawing.Rectangle selection = new System.Drawing.Rectangle(0, 45 + (21 * x), 900, 20);
 
-                        if (currentConnection.server.serverData.teamGame == true)
+                        
+                        if (currentConnection.server.serverData.teamGame == true || currentConnection.server.serverData.teams == true)
                         {
                             color = team.GetColor();
                         }
