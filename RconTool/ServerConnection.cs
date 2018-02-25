@@ -37,6 +37,15 @@ namespace EldoritoRcon
             }
         }
 
+        public bool IsConnected()
+        {
+            if (ws == null)
+            {
+                return false;
+            }
+            return ws.IsAlive;
+        }
+
         private void Ws_OnMessage(object sender, MessageEventArgs e)
         {
             if (ServerMessage != null)
@@ -49,10 +58,11 @@ namespace EldoritoRcon
                 ServerOpen(this);
 
             ws.Send(Encoding.ASCII.GetBytes(Password));
-            ws.Send(Encoding.ASCII.GetBytes("Server.RconMessageSpoolSize 30"));
-            ws.Send(Encoding.ASCII.GetBytes("Server.SendChatToRconClients 1"));
-            ws.Send(Encoding.ASCII.GetBytes("Server.SendChatSpool"));
-            ws.Send(Encoding.ASCII.GetBytes("writeconfig"));
+            if (connection.serverinfo.sendOnConnect != null)
+            foreach (string sc in connection.serverinfo.sendOnConnect)
+            {
+                ws.Send(Encoding.ASCII.GetBytes(sc));
+            }
         }
 
         private void Ws_OnClose(object sender, CloseEventArgs e)

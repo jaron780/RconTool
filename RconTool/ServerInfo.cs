@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace RconTool
@@ -14,13 +15,16 @@ namespace RconTool
         public string RconPassword { get; set; }
         [DataMember]
         public string RconPort { get; set; }
+        [DataMember]
+        public List<string> sendOnConnect { get; set; }
 
-        public ServerInfo(string ip, string infoport, string rconpassword, string rconport)
+        public ServerInfo(string ip, string infoport, string rconpassword, string rconport, List<string> sendOnConnect)
         {
             this.Ip = ip;
             this.InfoPort = infoport;
             this.RconPassword = rconpassword;
             this.RconPort = rconport;
+            this.sendOnConnect = sendOnConnect;
         }
 
         public string ToBase64()

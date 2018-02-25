@@ -602,10 +602,7 @@ namespace RconTool
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             Graphics graphics = e.Graphics;
-            if(currentConnection == null)
-            {
-                return;
-            }
+
             List<Team> teams = currentConnection.server.prevteamlist;
 
             System.Drawing.Rectangle name = new System.Drawing.Rectangle(0, 25, 180, 20);
@@ -650,6 +647,8 @@ namespace RconTool
                 DrawString(graphics, team2, "" + currentConnection.server.serverData.blueScore, blue, 10);
             }
 
+            
+
             int x = 0;
             for (int t = 0; t < teams.Count; t++)
             {
@@ -664,8 +663,8 @@ namespace RconTool
                         Color textcolor = Color.White;
                         System.Drawing.Rectangle selection = new System.Drawing.Rectangle(0, 45 + (21 * x), 900, 20);
 
-                        
-                        if (currentConnection.server.serverData.teamGame == true || currentConnection.server.serverData.teams == true)
+
+                        if (currentConnection.server.serverData.teamGame || currentConnection.server.serverData.teams)
                         {
                             color = team.GetColor();
                         }
@@ -675,16 +674,51 @@ namespace RconTool
                             color = darkgray;
                         }
 
-                        if (selection.Contains(mspt))
+                        if (currentConnection.server.serverData.eldewritoVersion.Contains("0.6") && currentConnection.server.serverData.teams == false)
                         {
-                            textcolor = gold;
-                            newContextPlayer = ps;
+                            color = System.Drawing.ColorTranslator.FromHtml(ps.primaryColor);
                         }
 
+
+                        if (selection.Contains(mspt))
+                        {
+                            //Console.WriteLine("POSAD1" + mspt.X + " : " + mspt.Y);
+                            textcolor = gold;
+                            newContextPlayer = ps;
+                            //contextPlayerTeamPos = t;
+                            //contextPlayerPos = p;
+                           
+                        }
+
+
+                        //Console.WriteLine(mspt.X + " : " + mspt.Y);
+                        //else
+                        //{
+                        //    //textcolor = gold;
+                        //    contextplayer = null;
+                        //    kick.Text = "&Kick";
+                        //    ban.Text = "&Ban";
+                        //    addToWatchList.Text = "&Add to WatchList";
+                        //    
+                        //}
+
+
+                        
                         String playername = (ps.Name == "") ? "Loading..." : ps.Name;
+
+                        if (currentConnection.server.serverData.eldewritoVersion.Contains("0.6"))
+                        {
+                            if (!playername.Equals("Loading..."))
+                            {
+                                playername = playername + " - " + ps.serviceTag;
+                            }
+                        }
+
                         System.Drawing.Rectangle pname = new System.Drawing.Rectangle(0, 45 + (21 * x), 179, 20);
 
+
                         DrawInfo(graphics, pname, playername, color, textcolor);
+                        
 
                         if (ps.IsAlive == false && currentConnection.server.serverData.status.ToLower() != "inlobby" && currentConnection.server.serverData.status != "Loading")
                         {
@@ -747,7 +781,7 @@ namespace RconTool
 
                         System.Drawing.Rectangle pbeststreak = new System.Drawing.Rectangle(670, 45 + (21 * x), 89, 20);
                         DrawInfo(graphics, pbeststreak, "" + ps.BestStreak, color, textcolor);
-
+                        
                         x += 1;
                     }
                 }

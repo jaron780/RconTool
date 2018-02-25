@@ -5,6 +5,8 @@ namespace RconTool
     public class PlayerInfo
     {
         public string Name { get; set; }
+        public string serviceTag { get; set; }
+        public string primaryColor { get; set; }
         public int Score { get; set; }
         public int Kills { get; set; }
         public int Assists { get; set; }

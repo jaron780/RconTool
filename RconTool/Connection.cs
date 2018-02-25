@@ -18,12 +18,13 @@ namespace RconTool
         private string laststatus;
         public Thread StatsThread;
         public Thread RconThread;
+        public Thread KeepRconAlive;
         public Boolean visable = false;
         
-        public Connection(Form1 form,string ip, string rconport, string infoport, string rconpassword)
+        public Connection(Form1 form,string ip, string rconport, string infoport, string rconpassword, List<string> sendOnConnect)
         {
             this.form = form;
-            this.serverinfo = new ServerInfo(ip, infoport, rconpassword, rconport);
+            this.serverinfo = new ServerInfo(ip, infoport, rconpassword, rconport, sendOnConnect);
             server = new Server();
 
             RconThread = new Thread(new ThreadStart(StartConnection));
@@ -36,6 +37,12 @@ namespace RconTool
 
             StatsThread = new Thread(new ThreadStart(RunStats));
             StatsThread.Start();
+
+            if (!serverinfo.RconPort.Equals(""))
+            {
+                KeepRconAlive = new Thread(new ThreadStart(KeepAlive));
+                KeepRconAlive.Start();
+            }
         }
 
         private void RunStats()
@@ -43,7 +50,7 @@ namespace RconTool
             while (true)
             {
                 GetStats();
-                Thread.Sleep(600);
+                Thread.Sleep(1000);
             }
 
         }
@@ -63,6 +70,12 @@ namespace RconTool
 
             StatsThread = new Thread(new ThreadStart(RunStats));
             StatsThread.Start();
+
+            if (!serverinfo.RconPort.Equals(""))
+            {
+                KeepRconAlive = new Thread(new ThreadStart(KeepAlive));
+                KeepRconAlive.Start();
+            }
         }
         public bool IsConnected()
         {
@@ -72,6 +85,20 @@ namespace RconTool
                 return false;
             }
             return serverConnection.ws.IsAlive;
+        }
+
+        public void KeepAlive()
+        {
+            while (true)
+            {
+                new Thread(delegate () {
+                    Thread.Sleep(2000);
+                    if (serverConnection != null)
+                        serverConnection.Command("version");
+                }).Start();
+
+                Thread.Sleep(120000);
+            }
         }
 
         public bool IsVisable()
@@ -133,6 +160,11 @@ namespace RconTool
 
         private void OnMessage(object sender, string message)
         {
+            if (message.StartsWith("0.5.1.1") || message.StartsWith("0.6.0.0"))
+            {
+
+            }
+            else
             if (message.StartsWith("accept"))
             {
                 PrintToConsole("Successfully Connected to Rcon");

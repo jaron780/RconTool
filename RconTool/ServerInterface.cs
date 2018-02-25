@@ -6,7 +6,7 @@ namespace RconTool
 {
     public partial class ServerInterface : Form
     {
-        class NewItem
+        public class NewItem
         {
             public string Ip { get; set; }
             public Connection Connection { get; set; }
@@ -34,7 +34,7 @@ namespace RconTool
             {
                 listBox1.Items.Add(new NewItem
                 {
-                    Ip = Form1.connectionList[x].serverinfo.Ip,
+                    Ip = Form1.connectionList[x].serverinfo.Ip + ":" + Form1.connectionList[x].serverinfo.InfoPort,
                     Connection = Form1.connectionList[x]
                 });
             }
@@ -44,8 +44,8 @@ namespace RconTool
         {
             if (listBox1.SelectedItem != null && ((NewItem)listBox1.SelectedItem).Connection != null)
             {                
-                new ServerEditor(((NewItem)listBox1.SelectedItem).Connection).ShowDialog();
-                this.Close();
+                new ServerEditor(((NewItem)listBox1.SelectedItem).Connection,listBox1).ShowDialog();
+                //this.Close();
             }
         }
 
@@ -78,15 +78,22 @@ namespace RconTool
 
         private void Button3_Click(object sender, EventArgs e)
         {
-            new ServerEditor().ShowDialog();
+            new ServerEditor(listBox1).ShowDialog();
             this.Close();
         }
 
         private void Button4_Click(object sender, EventArgs e)
         {
-            Form1.titleOption = comboBox1.SelectedItem.ToString();
-            Form1.SaveSettings();
-            this.Close();
+            if (Form1.connectionList.Count == 0)
+            {
+                MessageBox.Show("Must have atleast 1 server!", "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                Form1.titleOption = comboBox1.SelectedItem.ToString();
+                Form1.SaveSettings();
+                this.Close();
+            }
         }
     }
 }
