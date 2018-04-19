@@ -64,7 +64,7 @@
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\Json100r3\Bin\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\Downloads\Json100r3\Bin\net45\Newtonsoft.Json.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="System" />
@@ -82,7 +82,7 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="websocket-sharp">
-      <HintPath>..\..\..\..\Documents\Visual Studio 2017\Projects\RconTool\RconTool\websocket-sharp.dll</HintPath>
+      <HintPath>..\..\..\Downloads\websocket-sharp-master\websocket-sharp-master\websocket-sharp\bin\Debug_Ubuntu\websocket-sharp.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
   </ItemGroup>

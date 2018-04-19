@@ -12,5 +12,10 @@ namespace RconTool
             InitializeComponent();
             label2.Text = "Version: " + Form1.toolversion;
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -345,7 +345,6 @@ namespace RconTool
                         SetLabelText(Host, "Host: " + currentConnection.server.serverData.hostPlayer);
                         SetLabelText(SprintEnabled, "Sprint Enabled: " + currentConnection.server.serverData.sprintEnabled);
                         SetLabelText(Assassinations, "Assassinations: " + currentConnection.server.serverData.assassinationEnabled);
-                        SetLabelText(voip, "VoIP: " + currentConnection.server.serverData.voip);
                         SetLabelText(map, "Map: " + currentConnection.server.serverData.map);
                         SetLabelText(variant, "Variant: " + currentConnection.server.serverData.variant);
                         SetLabelText(varianttype, "Variant Type: " + currentConnection.server.serverData.variantType);
@@ -360,7 +359,6 @@ namespace RconTool
                         SetLabelText(Host, "Host: ");
                         SetLabelText(SprintEnabled, "Sprint Enabled: ");
                         SetLabelText(Assassinations, "Assassinations: ");
-                        SetLabelText(voip, "VoIP: ");
                         SetLabelText(map, "Map: ");
                         SetLabelText(variant, "Variant: ");
                         SetLabelText(varianttype, "Variant Type: ");

@@ -49,7 +49,6 @@
             this.varianttype = new System.Windows.Forms.Label();
             this.variant = new System.Windows.Forms.Label();
             this.map = new System.Windows.Forms.Label();
-            this.voip = new System.Windows.Forms.Label();
             this.Assassinations = new System.Windows.Forms.Label();
             this.SprintEnabled = new System.Windows.Forms.Label();
             this.Host = new System.Windows.Forms.Label();
@@ -128,14 +127,14 @@
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -229,7 +228,6 @@
             this.tabPage3.Controls.Add(this.varianttype);
             this.tabPage3.Controls.Add(this.variant);
             this.tabPage3.Controls.Add(this.map);
-            this.tabPage3.Controls.Add(this.voip);
             this.tabPage3.Controls.Add(this.Assassinations);
             this.tabPage3.Controls.Add(this.SprintEnabled);
             this.tabPage3.Controls.Add(this.Host);
@@ -246,7 +244,7 @@
             // 
             this.version.AutoSize = true;
             this.version.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.version.Location = new System.Drawing.Point(6, 205);
+            this.version.Location = new System.Drawing.Point(6, 182);
             this.version.Name = "version";
             this.version.Size = new System.Drawing.Size(71, 20);
             this.version.TabIndex = 10;
@@ -256,7 +254,7 @@
             // 
             this.players.AutoSize = true;
             this.players.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.players.Location = new System.Drawing.Point(6, 185);
+            this.players.Location = new System.Drawing.Point(6, 162);
             this.players.Name = "players";
             this.players.Size = new System.Drawing.Size(68, 20);
             this.players.TabIndex = 9;
@@ -266,7 +264,7 @@
             // 
             this.status.AutoSize = true;
             this.status.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.status.Location = new System.Drawing.Point(6, 165);
+            this.status.Location = new System.Drawing.Point(6, 142);
             this.status.Name = "status";
             this.status.Size = new System.Drawing.Size(64, 20);
             this.status.TabIndex = 8;
@@ -276,7 +274,7 @@
             // 
             this.varianttype.AutoSize = true;
             this.varianttype.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.varianttype.Location = new System.Drawing.Point(6, 145);
+            this.varianttype.Location = new System.Drawing.Point(6, 122);
             this.varianttype.Name = "varianttype";
             this.varianttype.Size = new System.Drawing.Size(98, 20);
             this.varianttype.TabIndex = 7;
@@ -286,7 +284,7 @@
             // 
             this.variant.AutoSize = true;
             this.variant.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.variant.Location = new System.Drawing.Point(6, 125);
+            this.variant.Location = new System.Drawing.Point(6, 102);
             this.variant.Name = "variant";
             this.variant.Size = new System.Drawing.Size(68, 20);
             this.variant.TabIndex = 6;
@@ -296,21 +294,11 @@
             // 
             this.map.AutoSize = true;
             this.map.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.map.Location = new System.Drawing.Point(6, 105);
+            this.map.Location = new System.Drawing.Point(6, 82);
             this.map.Name = "map";
             this.map.Size = new System.Drawing.Size(48, 20);
             this.map.TabIndex = 5;
             this.map.Text = "Map: ";
-            // 
-            // voip
-            // 
-            this.voip.AutoSize = true;
-            this.voip.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.voip.Location = new System.Drawing.Point(6, 85);
-            this.voip.Name = "voip";
-            this.voip.Size = new System.Drawing.Size(44, 20);
-            this.voip.TabIndex = 4;
-            this.voip.Text = "VoIP";
             // 
             // Assassinations
             // 
@@ -611,7 +599,6 @@
         private System.Windows.Forms.Label varianttype;
         private System.Windows.Forms.Label variant;
         private System.Windows.Forms.Label map;
-        private System.Windows.Forms.Label voip;
         private System.Windows.Forms.Label Assassinations;
         private System.Windows.Forms.Label SprintEnabled;
         private System.Windows.Forms.StatusStrip statusStrip1;

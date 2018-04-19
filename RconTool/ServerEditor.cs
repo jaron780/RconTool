@@ -18,7 +18,7 @@ namespace RconTool
             this.listbox = lsbx;
             InitializeComponent();
             string commandlist = "";
-            commandlist = "Server.RconMessageSpoolSize 30" + System.Environment.NewLine + "Server.SendChatToRconClients 1" + System.Environment.NewLine + "Server.SendChatSpool" + System.Environment.NewLine;
+            commandlist = "Server.SendChatToRconClients 1" + System.Environment.NewLine;
             textBox5.Text = commandlist;
         }
 
