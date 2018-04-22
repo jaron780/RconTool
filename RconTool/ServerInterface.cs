@@ -24,6 +24,8 @@ namespace RconTool
             listBox1.ValueMember = "connection";
 
             AddItems();
+
+            listBox1.SelectedIndex = listBox1.Items.Count - 1;
         }
 
         public void AddItems()
@@ -79,7 +81,6 @@ namespace RconTool
         private void Button3_Click(object sender, EventArgs e)
         {
             new ServerEditor(listBox1).ShowDialog();
-            this.Close();
         }
 
         private void Button4_Click(object sender, EventArgs e)
