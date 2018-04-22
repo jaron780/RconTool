@@ -16,7 +16,7 @@ namespace RconTool
     public partial class Form1 : Form
     {
         public static Form1 form;
-        public static string toolversion = "3.0";
+        public static string toolversion = "3.5";
         public static string titleOption = "";
         private static bool autoScroll = true;
         bool autoUpdateEnabled = true;
@@ -62,6 +62,12 @@ namespace RconTool
 
                 currentConnection.SetVisable(true);
             }
+
+            if(currentConnection == null)
+            {
+                CloseProgram();
+            }
+
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
 
