@@ -89,6 +89,7 @@ namespace RconTool
 
         public void KeepAlive()
         {
+            Thread.Sleep(2000);
             while (true)
             {
                 new Thread(delegate () {
@@ -160,7 +161,7 @@ namespace RconTool
 
         private void OnMessage(object sender, string message)
         {
-            if (message.StartsWith("0.5.1.1") || message.StartsWith("0.6.0.0"))
+            if (message.StartsWith("0.5.1.1") || message.StartsWith("0.6"))
             {
 
             }

@@ -51,8 +51,8 @@ namespace RconTool
             {
                 LoadSettings();
             }
-            trackBar1.Maximum = connectionList.Count - 1;
-            trackBar1.Minimum = 0;
+            trackBar1.Maximum = connectionList.Count;
+            trackBar1.Minimum = 1;
             if (connectionList.Count >= 1)
             {
                 currentConnection = connectionList[0];
@@ -116,7 +116,6 @@ namespace RconTool
             mnuContextMenu.Items.Add("Copy UID", null, this.CopyUID);
             mnuContextMenu.Items.Add("Copy Name", null, this.CopyName);
             mnuContextMenu.Items.Add("Copy Name and UID", null, this.CopyNameAndUID);
-            mnuContextMenu.Items.Add("Copy Stats URL", null, this.CopyStatsUrl);
         }
 
         private void KickPlayer(object sender, System.EventArgs e)
@@ -160,67 +159,6 @@ namespace RconTool
                 Clipboard.SetText(contextplayer.Name + ":" + contextplayer.GetUid());
                 currentConnection.PrintToConsole("Copied " + contextplayer.Name + ":" + contextplayer.GetUid() + " to Clipboard");
             }
-        }
-
-        private void CopyStatsUrl(object sender, EventArgs e)
-        {
-            if (contextplayer != null)
-            {
-                string surl = "http://halostats.click/privateapi/searchPlayers?name=" + contextplayer.Name + "&uid=" + ReverseHex(contextplayer.Uid);
-                string json = currentConnection.server.GetJson(surl);
-                Console.WriteLine("URL: " + surl);
-                Statdata stat = JsonConvert.DeserializeObject<Statdata>(json);
-                try
-                {
-                    string url = "http://halostats.click/Player/" + stat.Data[0].PlayerID;
-                    Clipboard.SetText(url);
-                    currentConnection.PrintToConsole("Copied " + url + " to Clipboard");
-                }
-                catch (Exception)
-                {
-                    string surl2 = "http://halostats.click/privateapi/searchPlayers?name=" + contextplayer.Name + "&uid=0" + ReverseHex(contextplayer.Uid);
-                    string json2 = currentConnection.server.GetJson(surl2);
-                    Console.WriteLine("URL: " + surl2);
-                    Statdata stat2 = JsonConvert.DeserializeObject<Statdata>(json2);
-
-                    try
-                    {
-                        string url2 = "http://halostats.click/Player/" + stat2.Data[0].PlayerID;
-                        Clipboard.SetText(url2);
-                        currentConnection.PrintToConsole("Copied USING '0' " + url2 + " to Clipboard");
-                    }
-                    catch (Exception)
-                    {
-
-                    }
-                }
-            }
-        }
-
-        private string ReverseHex(string originalHex)
-        {
-            int lengthInBytes = originalHex.Count() / 2;
-            char[] chars = new char[lengthInBytes * 2];
-            for (int index = 0; index < lengthInBytes; index++)
-            {
-                int reversedIndex = lengthInBytes - 1 - index;
-                chars[reversedIndex * 2] = originalHex[index * 2];
-                chars[reversedIndex * 2 + 1] = originalHex[index * 2 + 1];
-            }
-            string reversed = new string(chars);
-
-            return reversed.TrimStart('0');
-        }
-
-        public class Statdata
-        {
-            public List<Resultdata> Data { get; set; }
-        }
-
-        public class Resultdata
-        {
-            public string PlayerID;
-            public int Rank;
         }
 
         private void BanPlayer(object sender, System.EventArgs e)
@@ -371,7 +309,7 @@ namespace RconTool
                     if (currentConnection.server.serverData != null && titleOption != null && titleOption != "")
                     {
                         if (titleOption.Equals("Server IP"))
-                            SetTitle("Dedicated Rcon Tool - " + currentConnection.serverinfo.Ip);
+                            SetTitle("Dedicated Rcon Tool - " + currentConnection.serverinfo.Ip + ":" + currentConnection.serverinfo.InfoPort);
                         else if (titleOption.Equals("Server Name") && currentConnection.server.serverData != null && currentConnection.server.serverData.name != null)
                             SetTitle("Dedicated Rcon Tool - " + currentConnection.server.serverData.name);
                         else if (titleOption.Equals("Server Game") && currentConnection.server.serverData != null && currentConnection.server.serverData.variant != null)
@@ -416,13 +354,13 @@ namespace RconTool
             try
             {
                 g.DrawRectangle(System.Drawing.Pens.Black, rectangle);
-                System.Drawing.Font drawFont = new Font("SansSerif", 12);
+                System.Drawing.Font drawFont = new Font("SansSerif", 7);
                 StringFormat sf = new StringFormat();
                 sf.LineAlignment = StringAlignment.Center;
                 sf.Alignment = StringAlignment.Center;
                 try
                 {
-                    g.DrawString(name, this.Font, Brushes.Black, rectangle, sf);
+                    g.DrawString(name, drawFont, Brushes.Black, rectangle, sf);
                 }
                 catch (ArgumentException)
                 {
@@ -493,7 +431,7 @@ namespace RconTool
             }
             else
             {
-                this.trackBar1.Maximum = connectionList.Count - 1;
+                this.trackBar1.Maximum = connectionList.Count;
                 SetLabelText(label1, "#" + this.trackBar1.Value);
             }
         }
@@ -603,35 +541,35 @@ namespace RconTool
 
             List<Team> teams = currentConnection.server.prevteamlist;
 
-            System.Drawing.Rectangle name = new System.Drawing.Rectangle(0, 25, 180, 20);
+            System.Drawing.Rectangle name = new System.Drawing.Rectangle(-1, 25, 282, 20);
             DrawTab(graphics, name, "NAME");
 
-            System.Drawing.Rectangle score = new System.Drawing.Rectangle(180, 25, 50, 20);
+            System.Drawing.Rectangle score = new System.Drawing.Rectangle(name.X + name.Width, 25, 50, 20);
             DrawTab(graphics, score, "SCORE");
 
-            System.Drawing.Rectangle kills = new System.Drawing.Rectangle(230, 25, 50, 20);
+            System.Drawing.Rectangle kills = new System.Drawing.Rectangle(score.X + score.Width, 25, 50, 20);
             DrawTab(graphics, kills, "KILLS");
 
-            System.Drawing.Rectangle deaths = new System.Drawing.Rectangle(280, 25, 50, 20);
+            System.Drawing.Rectangle deaths = new System.Drawing.Rectangle(kills.X + kills.Width, 25, 50, 20);
             DrawTab(graphics, deaths, "DEATHS");
 
-            System.Drawing.Rectangle Kd = new System.Drawing.Rectangle(330, 25, 50, 20);
+            System.Drawing.Rectangle Kd = new System.Drawing.Rectangle(deaths.X + deaths.Width, 25, 60, 20);
             DrawTab(graphics, Kd, "K/D");
 
-            System.Drawing.Rectangle assists = new System.Drawing.Rectangle(380, 25, 60, 20);
+            System.Drawing.Rectangle assists = new System.Drawing.Rectangle(Kd.X + Kd.Width, 25, 50, 20);
             DrawTab(graphics, assists, "ASSISTS");
 
-            System.Drawing.Rectangle betrayal = new System.Drawing.Rectangle(440, 25, 80, 20);
+            System.Drawing.Rectangle betrayal = new System.Drawing.Rectangle(assists.X + assists.Width, 25, 60, 20);
             DrawTab(graphics, betrayal, "BETRAYALS");
 
-            System.Drawing.Rectangle suicide = new System.Drawing.Rectangle(520, 25, 60, 20);
+            System.Drawing.Rectangle suicide = new System.Drawing.Rectangle(betrayal.X + betrayal.Width, 25, 50, 20);
             DrawTab(graphics, suicide, "SUICIDES");
 
-            System.Drawing.Rectangle timealive = new System.Drawing.Rectangle(580, 25, 90, 20);
+            System.Drawing.Rectangle timealive = new System.Drawing.Rectangle(suicide.X + suicide.Width, 25, 60, 20);
             DrawTab(graphics, timealive, "TIME ALIVE");
 
-            System.Drawing.Rectangle beststreak = new System.Drawing.Rectangle(670, 25, 90, 20);
-            DrawTab(graphics, beststreak, "BEST STREAK");
+            System.Drawing.Rectangle beststreak = new System.Drawing.Rectangle(timealive.X + timealive.Width, 25, 50, 20);
+            DrawTab(graphics, beststreak, "STREAK");
 
             if (currentConnection.server.serverData != null)
             {
@@ -711,26 +649,27 @@ namespace RconTool
                                 playername = playername + " - " + ps.serviceTag;
                             }
                         }
+                        
 
-                        System.Drawing.Rectangle pname = new System.Drawing.Rectangle(0, 45 + (21 * x), 179, 20);
-
+                        System.Drawing.Rectangle pname = new System.Drawing.Rectangle(0, 45 + (21 * x), name.Width-1, 20);
+                        
 
                         DrawInfo(graphics, pname, playername, color, textcolor);
                         
 
                         if (ps.IsAlive == false && currentConnection.server.serverData.status.ToLower() != "inlobby" && currentConnection.server.serverData.status != "Loading")
                         {
-                            System.Drawing.Rectangle deadX = new System.Drawing.Rectangle(10, 47 + (21 * x), 13, 20);
+                            System.Drawing.Rectangle deadX = new System.Drawing.Rectangle(3, 47 + (21 * x), 13, 20);
                             DrawString(graphics, deadX, "X", Color.Black, 16);
                         }
 
-                        System.Drawing.Rectangle pscore = new System.Drawing.Rectangle(180, 45 + (21 * x), 49, 20);
+                        System.Drawing.Rectangle pscore = new System.Drawing.Rectangle(pname.Width+1, 45 + (21 * x), score.Width-1, 20);
                         DrawInfo(graphics, pscore, "" + ps.Score, color, textcolor);
 
-                        System.Drawing.Rectangle pkills = new System.Drawing.Rectangle(230, 45 + (21 * x), 49, 20);
+                        System.Drawing.Rectangle pkills = new System.Drawing.Rectangle(pscore.X + pscore.Width + 1, 45 + (21 * x), kills.Width-1, 20);
                         DrawInfo(graphics, pkills, "" + ps.Kills, color, textcolor);
 
-                        System.Drawing.Rectangle pdeath = new System.Drawing.Rectangle(280, 45 + (21 * x), 49, 20);
+                        System.Drawing.Rectangle pdeath = new System.Drawing.Rectangle(pkills.X + pkills.Width + 1, 45 + (21 * x), deaths.Width-1, 20);
                         DrawInfo(graphics, pdeath, "" + ps.Deaths, color, textcolor);
 
                         double kd = 0;
@@ -744,7 +683,7 @@ namespace RconTool
                             kd = ps.Kills;
                         }
 
-                        System.Drawing.Rectangle pkd = new System.Drawing.Rectangle(330, 45 + (21 * x), 49, 20);
+                        System.Drawing.Rectangle pkd = new System.Drawing.Rectangle(pdeath.X + pdeath.Width + 1, 45 + (21 * x), Kd.Width-1, 20);
                         if (kd >= 6)
                         {
                             DrawInfo(graphics, pkd, "" + kd, gold, textcolor);
@@ -753,10 +692,10 @@ namespace RconTool
                         {
                             DrawInfo(graphics, pkd, "" + kd, color, textcolor);
                         }
-                        System.Drawing.Rectangle passist = new System.Drawing.Rectangle(380, 45 + (21 * x), 59, 20);
+                        System.Drawing.Rectangle passist = new System.Drawing.Rectangle(pkd.X + pkd.Width + 1, 45 + (21 * x), assists.Width-1, 20);
                         DrawInfo(graphics, passist, "" + ps.Assists, color, textcolor);
 
-                        System.Drawing.Rectangle pbetray = new System.Drawing.Rectangle(440, 45 + (21 * x), 79, 20);
+                        System.Drawing.Rectangle pbetray = new System.Drawing.Rectangle(passist.X + passist.Width + 1, 45 + (21 * x), betrayal.Width-1, 20);
                         if (ps.Betrayals >= 1)
                         {
                             DrawInfo(graphics, pbetray, "" + ps.Betrayals, gold, textcolor);
@@ -771,13 +710,13 @@ namespace RconTool
                             DrawInfo(graphics, pbetray, "" + ps.Betrayals, color, textcolor);
                         }
 
-                        System.Drawing.Rectangle psuicide = new System.Drawing.Rectangle(520, 45 + (21 * x), 59, 20);
+                        System.Drawing.Rectangle psuicide = new System.Drawing.Rectangle(pbetray.X + pbetray.Width + 1, 45 + (21 * x), suicide.Width-1, 20);
                         DrawInfo(graphics, psuicide, "" + ps.Suicides, color, textcolor);
 
-                        System.Drawing.Rectangle ptimealive = new System.Drawing.Rectangle(580, 45 + (21 * x), 89, 20);
+                        System.Drawing.Rectangle ptimealive = new System.Drawing.Rectangle(psuicide.X + psuicide.Width + 1, 45 + (21 * x), timealive.Width-1, 20);
                         DrawInfo(graphics, ptimealive, "" + ps.TimeSpentAlive, color, textcolor);
 
-                        System.Drawing.Rectangle pbeststreak = new System.Drawing.Rectangle(670, 45 + (21 * x), 89, 20);
+                        System.Drawing.Rectangle pbeststreak = new System.Drawing.Rectangle(ptimealive.X +ptimealive.Width + 1, 45 + (21 * x), beststreak.Width-1, 20);
                         DrawInfo(graphics, pbeststreak, "" + ps.BestStreak, color, textcolor);
                         
                         x += 1;
@@ -964,7 +903,7 @@ namespace RconTool
 
         private void TrackBar1_Scroll(object sender, EventArgs e)
         {
-            int sel = trackBar1.Value;
+            int sel = trackBar1.Value -1;
             if (sel <= connectionList.Count)
             {
                 if (currentConnection != null)

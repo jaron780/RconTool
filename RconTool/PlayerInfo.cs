@@ -20,19 +20,7 @@ namespace RconTool
         public string Uid { get; set; }
         public string GetUid()
         {
-            return ReverseHex(this.Uid);
-        }
-        private string ReverseHex(string originalHex)
-        {
-            int lengthInBytes = originalHex.Count() / 2;
-            char[] chars = new char[lengthInBytes * 2];
-            for (int index = 0; index < lengthInBytes; index++)
-            {
-                int reversedIndex = lengthInBytes - 1 - index;
-                chars[reversedIndex * 2] = originalHex[index * 2];
-                chars[reversedIndex * 2 + 1] = originalHex[index * 2 + 1];
-            }
-            return new string(chars);
+            return this.Uid;
         }
     }
 }
