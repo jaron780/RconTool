@@ -13,7 +13,11 @@ namespace RconTool
         public Server server = null;
         private string consoleText = "";
         private string chatText = "";
+        private string joinleaveText = "";
         public ServerConnection serverConnection;
+
+        public List<Player> oldPlayerlist = new List<Player>();
+        public List<Player> playerlist = new List<Player>();
 
         private string laststatus;
         public Thread StatsThread;
@@ -186,6 +190,11 @@ namespace RconTool
             }
         }
 
+        public string getJoinLeave()
+        {
+            return this.joinleaveText;
+        }
+
         public void ClearConsole()
         {
             this.consoleText = "";
@@ -195,7 +204,12 @@ namespace RconTool
         {
             this.chatText = "";
         }
-        
+
+        public void clearJoinLeave()
+        {
+            this.joinleaveText = "";
+        }
+
         public void PrintToConsole(string line)
         {
             
@@ -219,10 +233,34 @@ namespace RconTool
             Console.WriteLine(serverinfo.Ip + ": " + result);
         }
         
+        public void printToJoinLeave(string line)
+        {
+            
+            string result = Regex.Replace(line, @"\r\n?|\n", System.Environment.NewLine);
+            if (IsVisable())
+            {
+                form.AppendJoinLeave((result + System.Environment.NewLine));
+            }
+            joinleaveText = joinleaveText + (result + System.Environment.NewLine);
+            Console.WriteLine(serverinfo.Ip + ": " +result);
+        }
+
         public void SendPM(string name, string message)
         {
             SendToRcon("Server.PM \"" + name + "\" \"" + message + "\"");
             Console.WriteLine("Server.PM \"" + name + "\" \"" + message + "\"");
+        }
+
+        private bool ListContainsPlayer(List<Player> list, Player ply)
+        {
+            for (int x = 0; x < list.Count; x++)
+            {
+                if (list[x].name.Equals(ply.name) && list[x].uid.Equals(ply.uid))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public string GetConsole()
@@ -281,6 +319,59 @@ namespace RconTool
                             }
                             laststatus = server.serverData.status;
                         }
+                    }
+
+                    if (playerlist == null)
+                    {
+                        for (int x = 0; x < server.serverData.Players.Count; x++)
+                        {
+                            Player ply = new Player();
+                            ply.name = server.serverData.Players[x].Name;
+                            ply.uid = server.serverData.Players[x].GetUid();
+                            ply.timeJoined = DateTime.Now.ToString("[MM-dd-yyyy HH:mm:ss] ");
+
+                            if (!ply.name.Equals(""))
+                                playerlist.Add(ply);
+                        }
+                    }
+                    else
+                    if (oldPlayerlist == null && playerlist != null)
+                        oldPlayerlist = playerlist;
+                    else
+                    if (server.serverData != null && server.serverData.Players != null)
+                    {
+                        playerlist = new List<Player>();
+                        for (int x = 0; x < server.serverData.Players.Count; x++)
+                        {
+                            Player ply = new Player();
+                            ply.name = server.serverData.Players[x].Name;
+                            ply.uid = server.serverData.Players[x].GetUid();
+                            ply.timeJoined = DateTime.Now.ToString("[MM-dd-yyyy HH:mm:ss] ");
+
+                            if (!ply.name.Equals(""))
+                                playerlist.Add(ply);
+
+                        }
+
+                        for (int x = 0; x < playerlist.Count; x++)
+                        {
+                            if (ListContainsPlayer(oldPlayerlist, playerlist[x]) == false)
+                            {
+                                Player ply = playerlist[x];
+                                printToJoinLeave(ply.timeJoined + ply.name + " : " + ply.uid + " has Joined.");
+                            }
+                        }
+
+                        for (int x = 0; x < oldPlayerlist.Count; x++)
+                        {
+                            if (ListContainsPlayer(playerlist, oldPlayerlist[x]) == false)
+                            {
+                                Player ply = oldPlayerlist[x];
+                                printToJoinLeave(ply.timeJoined + ply.name + " : " + ply.uid + " has Left.");
+                            }
+                        }
+
+                        oldPlayerlist = playerlist;
                     }
                 }
                 catch (Exception)

@@ -16,7 +16,7 @@ namespace RconTool
     public partial class Form1 : Form
     {
         public static Form1 form;
-        public static string toolversion = "3.5";
+        public static string toolversion = "3.6";
         public static string titleOption = "";
         private static bool autoScroll = true;
         bool autoUpdateEnabled = true;
@@ -110,6 +110,12 @@ namespace RconTool
         {
             if (autoUpdateEnabled)
                 AppendText(textBox3, txt);
+        }
+
+        public void AppendJoinLeave(string txt)
+        {
+            if (autoUpdateEnabled)
+                AppendText(textBox5, txt);
         }
 
         public void AddContextMenuAndItems()
@@ -790,6 +796,16 @@ namespace RconTool
                 this.tabControl1.Size = new System.Drawing.Size(751, 340);
             }
             else
+            if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage5"])
+            {
+                this.tabControl1.Size = new System.Drawing.Size(751, 340);
+                this.textBox5.Size = new System.Drawing.Size(743, 314);
+                this.textBox5.Location = new System.Drawing.Point(0, 0);
+                button1.Visible = false;
+                textBox1.Visible = false;
+                button10.Visible = false;
+            }
+            else
             {
                 textBox1.Visible = true;
                 button1.Visible = true;
@@ -904,6 +920,12 @@ namespace RconTool
                 currentConnection.ClearChat();
                 ClearTextBoxs(textBox3, "");
             }
+            else 
+            if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage5"])
+            {
+                currentConnection.clearJoinLeave();
+                ClearTextBoxs(textBox5, "");
+            }
 
         }
 
@@ -921,6 +943,7 @@ namespace RconTool
             }
             SetTextBoxText(textBox2, currentConnection.GetConsole());
             SetTextBoxText(textBox3, currentConnection.GetChat());
+            SetTextBoxText(textBox5, currentConnection.getJoinLeave());
         }
 
         private void TextBox2_TextChanged(object sender, EventArgs e)
