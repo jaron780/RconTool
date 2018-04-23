@@ -15,7 +15,8 @@ This is a tool for Server hosts to monitor and moderate their own servers.
 
 # Instructions 
 
-- Extract the zip from the Releases page
+- Download the latest Release from https://github.com/jaron780/RconTool/releases/latest
+- Extract the zip to folder of your choice
 - double click the exe
 - Click add server and fill in your servers info which can be found in dewrito_prefs.cfg file
 - Click save after adding all your servers and you are done
