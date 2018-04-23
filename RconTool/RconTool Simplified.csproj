@@ -93,7 +93,6 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
-    <Compile Include="ChatManager.cs" />
     <Compile Include="ChatMessage.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="ServerEditor.cs">

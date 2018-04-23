@@ -16,7 +16,7 @@ namespace RconTool
     public partial class Form1 : Form
     {
         public static Form1 form;
-        public static string toolversion = "3.6";
+        public static string toolversion = "3.6.5";
         public static string titleOption = "";
         private static bool autoScroll = true;
         bool autoUpdateEnabled = true;
@@ -44,22 +44,16 @@ namespace RconTool
             InitializeComponent();
 
             if (!HasSetting())
-            {
                 new ServerInterface().ShowDialog();
-            }
             else
-            {
                 LoadSettings();
-            }
             trackBar1.Maximum = connectionList.Count;
             trackBar1.Minimum = 1;
             if (connectionList.Count >= 1)
             {
                 currentConnection = connectionList[0];
-
                 SetTextBoxText(textBox2, currentConnection.GetConsole());
                 SetTextBoxText(textBox3, currentConnection.GetChat());
-
                 currentConnection.SetVisable(true);
             }
 
@@ -80,10 +74,8 @@ namespace RconTool
 
             tick = new Thread(new ThreadStart(Tick));
             tick.Start();
-
             tick2 = new Thread(new ThreadStart(Tick2));
             tick2.Start();
-
             RconThread = new Thread(new ThreadStart(AllRcon));
             RconThread.Start();
         }
@@ -93,9 +85,7 @@ namespace RconTool
             while (true)
             {
                 if (currentConnection != null)
-                {
                     SetTrackBar();
-                }
                 Thread.Sleep(100);
             }
         }
@@ -122,7 +112,6 @@ namespace RconTool
         {
             ContextMenuStrip mnuContextMenu = new ContextMenuStrip();
             this.scoreBoardContextMenu = mnuContextMenu;
-
             mnuContextMenu.Items.Add("Kick", null, this.KickPlayer);
             mnuContextMenu.Items.Add("Ban", null, this.BanPlayer);
             mnuContextMenu.Items.Add("Copy UID", null, this.CopyUID);
@@ -327,18 +316,13 @@ namespace RconTool
                         else if (titleOption.Equals("Server Game") && currentConnection.server.serverData != null && currentConnection.server.serverData.variant != null)
                         {
                             if (currentConnection.server.serverData.status.Equals("InLobby"))
-                            {
                                 SetTitle("Dedicated Rcon Tool - In Lobby");
-                            }
                             else
                                 SetTitle("Dedicated Rcon Tool - " + currentConnection.server.serverData.variant + " on " + currentConnection.server.serverData.map);
                         }
                         else
                         if (titleOption.Equals("None"))
-                        {
                             SetTitle("Dedicated Rcon Tool");
-                        }
-
                     }
 
                     toolStripStatusLabel2.Text = "Rcon: " + currentConnection.IsConnected();
@@ -346,8 +330,6 @@ namespace RconTool
 
                     if (currentConnection.server.serverData != null)
                     {
-
-
                         SetButtonLabel(button4, (currentConnection.server.serverData.sprintEnabled == "0" ? "Enable Sprint" : "Disable Sprint"));
                         SetButtonLabel(button5, (currentConnection.server.serverData.sprintUnlimitedEnabled == "0" ? "Enable Unlimited Sprint" : "Disable Unlimited Sprint"));
                         SetButtonLabel(button6, (currentConnection.server.serverData.assassinationEnabled == "0" ? "Enable Assassinations" : "Disable Assassinations"));
@@ -390,7 +372,6 @@ namespace RconTool
             sf.LineAlignment = StringAlignment.Center;
             sf.Alignment = StringAlignment.Center;
             g.DrawString(name, drawFont, new SolidBrush(color), rectangle, sf);
-
         }
 
         private void DrawInfo(System.Drawing.Graphics g, System.Drawing.Rectangle rectangle, string name, Color color, Color text)
@@ -402,7 +383,6 @@ namespace RconTool
             sf.LineAlignment = StringAlignment.Center;
             sf.Alignment = StringAlignment.Center;
             g.DrawString(name, drawFont, new SolidBrush(text), rectangle, sf);
-
         }
 
         public static double Round(double v, int place)
@@ -424,10 +404,7 @@ namespace RconTool
             {
                 currentConnection.PrintToConsole(textBox1.Text);
                 if (currentConnection.serverConnection != null)
-                {
                     currentConnection.SendToRcon(textBox1.Text);
-
-                }
                 textBox1.Clear();
 
             }
@@ -465,7 +442,6 @@ namespace RconTool
                 }
                 else
                 {
-
                     int caretPos = tx.Text.Length;
                     tx.Text += text;
                     tx.Select(caretPos, 0);
@@ -623,35 +599,15 @@ namespace RconTool
                         }
 
                         if (currentConnection.server.serverData.eldewritoVersion.Contains("0.6") && currentConnection.server.serverData.teams == false)
-                        {
                             color = System.Drawing.ColorTranslator.FromHtml(ps.primaryColor);
-                        }
 
 
                         if (selection.Contains(mspt))
                         {
-                            //Console.WriteLine("POSAD1" + mspt.X + " : " + mspt.Y);
                             textcolor = gold;
                             newContextPlayer = ps;
-                            //contextPlayerTeamPos = t;
-                            //contextPlayerPos = p;
-                           
                         }
 
-
-                        //Console.WriteLine(mspt.X + " : " + mspt.Y);
-                        //else
-                        //{
-                        //    //textcolor = gold;
-                        //    contextplayer = null;
-                        //    kick.Text = "&Kick";
-                        //    ban.Text = "&Ban";
-                        //    addToWatchList.Text = "&Add to WatchList";
-                        //    
-                        //}
-
-
-                        
                         String playername = (ps.Name == "") ? "Loading..." : ps.Name;
 
                         if (currentConnection.server.serverData.eldewritoVersion.Contains("0.6"))
@@ -661,11 +617,9 @@ namespace RconTool
                                 playername = playername + " - " + ps.serviceTag;
                             }
                         }
-                        
 
                         System.Drawing.Rectangle pname = new System.Drawing.Rectangle(0, 45 + (21 * x), name.Width-1, 20);
                         
-
                         DrawInfo(graphics, pname, playername, color, textcolor);
                         
 
@@ -686,41 +640,24 @@ namespace RconTool
 
                         double kd = 0;
                         if (ps.Deaths > 0)
-                        {
                             kd = Round((double)ps.Kills / (double)ps.Deaths, 2);
-                        }
-                        else
-                        if (ps.Deaths == 0)
-                        {
+                        else if (ps.Deaths == 0)
                             kd = ps.Kills;
-                        }
 
                         System.Drawing.Rectangle pkd = new System.Drawing.Rectangle(pdeath.X + pdeath.Width + 1, 45 + (21 * x), Kd.Width-1, 20);
                         if (kd >= 6)
-                        {
                             DrawInfo(graphics, pkd, "" + kd, gold, textcolor);
-                        }
-                        else
-                        {
-                            DrawInfo(graphics, pkd, "" + kd, color, textcolor);
-                        }
+                        else DrawInfo(graphics, pkd, "" + kd, color, textcolor);
                         System.Drawing.Rectangle passist = new System.Drawing.Rectangle(pkd.X + pkd.Width + 1, 45 + (21 * x), assists.Width-1, 20);
                         DrawInfo(graphics, passist, "" + ps.Assists, color, textcolor);
 
                         System.Drawing.Rectangle pbetray = new System.Drawing.Rectangle(passist.X + passist.Width + 1, 45 + (21 * x), betrayal.Width-1, 20);
                         if (ps.Betrayals >= 1)
-                        {
                             DrawInfo(graphics, pbetray, "" + ps.Betrayals, gold, textcolor);
-                        }
-                        else
-                        if (ps.Betrayals >= 2)
-                        {
+                        else if (ps.Betrayals >= 2)
                             DrawInfo(graphics, pbetray, "" + ps.Betrayals, color, textcolor);
-                        }
                         else
-                        {
                             DrawInfo(graphics, pbetray, "" + ps.Betrayals, color, textcolor);
-                        }
 
                         System.Drawing.Rectangle psuicide = new System.Drawing.Rectangle(pbetray.X + pbetray.Width + 1, 45 + (21 * x), suicide.Width-1, 20);
                         DrawInfo(graphics, psuicide, "" + ps.Suicides, color, textcolor);

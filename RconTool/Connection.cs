@@ -165,11 +165,10 @@ namespace RconTool
 
         private void OnMessage(object sender, string message)
         {
-            if (message.StartsWith("0.5.1.1") || message.StartsWith("0.6"))
-            {
+            if (!message.StartsWith("0.6"))
+                return;
+            
 
-            }
-            else
             if (message.StartsWith("accept"))
             {
                 PrintToConsole("Successfully Connected to Rcon");
@@ -177,11 +176,12 @@ namespace RconTool
             else
             if (!message.Equals(""))
             {
-                
                 if (RegexParser.IsChat(message))
                 {
                     ChatMessage cm = RegexParser.ParseChat(message);
-                    ChatManager.ProccessChat(this, cm);
+
+                    string newline = "[" + cm.date + " " + cm.time + "] " + cm.name + ": " + cm.message + "";
+                    PrintToChat(newline);
                 }
                 else
                 {
@@ -215,9 +215,7 @@ namespace RconTool
             
             string result = Regex.Replace(line, @"\r\n?|\n", System.Environment.NewLine);
             if (IsVisable())
-            {
                 form.AppendConsole((result + System.Environment.NewLine));
-            }
             consoleText = consoleText + (result + System.Environment.NewLine);
             Console.WriteLine(serverinfo.Ip + ": " +result);
         }
@@ -226,9 +224,7 @@ namespace RconTool
         {            
             string result = Regex.Replace(line, @"\r\n?|\n", System.Environment.NewLine);
             if (IsVisable())
-            {
                 form.AppendChat((result + System.Environment.NewLine));
-            }
             chatText = chatText + (result + System.Environment.NewLine);
             Console.WriteLine(serverinfo.Ip + ": " + result);
         }
@@ -238,17 +234,13 @@ namespace RconTool
             
             string result = Regex.Replace(line, @"\r\n?|\n", System.Environment.NewLine);
             if (IsVisable())
-            {
                 form.AppendJoinLeave((result + System.Environment.NewLine));
-            }
             joinleaveText = joinleaveText + (result + System.Environment.NewLine);
-            Console.WriteLine(serverinfo.Ip + ": " +result);
         }
 
         public void SendPM(string name, string message)
         {
             SendToRcon("Server.PM \"" + name + "\" \"" + message + "\"");
-            Console.WriteLine("Server.PM \"" + name + "\" \"" + message + "\"");
         }
 
         private bool ListContainsPlayer(List<Player> list, Player ply)
@@ -299,9 +291,7 @@ namespace RconTool
                     {
                         laststatus = server.serverData.status;
                         if (server.serverData.variant != null && !server.serverData.variant.Equals("null") && !server.serverData.variant.Equals(""))
-                        {
                             PrintToConsole("Current Game - " + server.serverData.variant + ":" + server.serverData.variantType + " - " + server.serverData.map);
-                        }
                     }
                     else
                     {
@@ -309,14 +299,9 @@ namespace RconTool
                         if (!laststatus.ToLower().Equals(server.serverData.status.ToLower()))
                         {
                             if (server.serverData.status.ToLower().Equals("ingame"))
-                            {
                                 PrintToConsole(date + "Game Started - " + server.serverData.variant + ":" + server.serverData.variantType + " - " + server.serverData.map);
-                            }
-                            else
-                            if (server.serverData.status.ToLower().Equals("inlobby"))
-                            {
+                            else if (server.serverData.status.ToLower().Equals("inlobby"))
                                 PrintToConsole(date + "Match Ended");
-                            }
                             laststatus = server.serverData.status;
                         }
                     }
@@ -384,8 +369,6 @@ namespace RconTool
                 {
                     server.prevteamlist.Add(new Team(item));
                 });
-
-
             }
             catch (Exception)
             {
