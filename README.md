@@ -19,8 +19,8 @@ This is a tool for Server hosts to monitor and moderate their own servers.
 - Extract the zip to folder of your choice
 - double click the exe
 - Click add server and fill in your servers info which can be found in dewrito_prefs.cfg file
-- Click save after adding all your servers and you are done
-
+- Click save after adding all your servers
+- To switch between servers use the slider at the bottom of the program
 
 
 Created by Jaron#0898 on Discord
