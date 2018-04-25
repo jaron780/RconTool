@@ -23,4 +23,4 @@ This is a tool for Server hosts to monitor and moderate their own servers.
 - To switch between servers use the slider at the bottom of the program
 
 
-Created by Jaron#0898 on Discord
+Created by Jaron
