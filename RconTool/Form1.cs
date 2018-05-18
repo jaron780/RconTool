@@ -16,13 +16,14 @@ namespace RconTool
     public partial class Form1 : Form
     {
         public static Form1 form;
-        public static string toolversion = "3.6.5";
+        public static string toolversion = "3.7";
         public static string titleOption = "";
         private static bool autoScroll = true;
         bool autoUpdateEnabled = true;
 
         public static List<Connection> connectionList = new List<Connection>();
         public static Connection currentConnection = null;
+        public static TimedCommandArray timedCommandArray = new TimedCommandArray();
 
         public static Thread RconThread;
         public static Thread tick;
@@ -191,7 +192,27 @@ namespace RconTool
         public static void LoadSettings()
         {
             titleOption = LoadSetting("titleOption");
+            loadTimedCommands();
             LoadServers();
+        }
+
+        private static void loadTimedCommands()
+        {
+            if (LoadSetting("TimedCommandsEncoded") != null)
+            {
+                string json = Base64Decode(LoadSetting("TimedCommandsEncoded"));
+                using (var ms = new MemoryStream(Encoding.Unicode.GetBytes(json)))
+                {
+                    DataContractJsonSerializer deserializer = new DataContractJsonSerializer(typeof(TimedCommandArray));
+                    TimedCommandArray bsObj2 = (TimedCommandArray)deserializer.ReadObject(ms);
+                    timedCommandArray = bsObj2;
+                }
+            }
+        }
+
+        private static void SaveTimedCommands()
+        {
+            SaveSetting("TimedCommandsEncoded", timedCommandArray.toBase64());
         }
 
         public static void LoadServers()
@@ -240,6 +261,7 @@ namespace RconTool
         {
             SaveSetting("TitleOption", titleOption);
             SaveServers();
+            SaveTimedCommands();
             SaveConfigToFile();
         }
 
@@ -263,6 +285,81 @@ namespace RconTool
             {
                 try
                 {
+                    for (int x = 0; x < timedCommandArray.GetCommandList().Count(); x++)
+                    {
+                        TimedCommandItem c = timedCommandArray.GetCommandList()[x];
+                        if (c.IsEnabled())
+                        {
+                            if (c.RunEveryXMin())
+                            {
+                                if (c.lastRan == null)
+                                {
+                                    c.lastRan = DateTime.Now;
+                                    c.NextRun = c.lastRan.AddMinutes(c.GetEveryXMin());
+
+                                    for (int y = 0; y < c.GetCommands().Count(); y++)
+                                    {
+                                        for (int con = 0; con < connectionList.Count; con++)
+                                        {
+                                            Connection cn = connectionList[con];
+                                            if (cn.IsConnected())
+                                            {
+                                                if (c.RunEveryXMin())
+                                                {
+                                                    if (cn.server.serverData.numPlayers >= 1)
+                                                    {
+                                                        cn.SendToRcon(c.GetCommands()[y]);
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    cn.SendToRcon(c.GetCommands()[y]);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                else
+                                if (DateTime.Now >= c.NextRun)
+                                {
+                                    c.lastRan = DateTime.Now;
+                                    c.NextRun = c.lastRan.AddMinutes(c.GetEveryXMin());
+
+                                    for (int y = 0; y < c.GetCommands().Count(); y++)
+                                    {
+                                        for (int con = 0; con < connectionList.Count; con++)
+                                        {
+                                            Connection cn = connectionList[con];
+                                            if (cn.IsConnected())
+                                            {
+                                                cn.SendToRcon(c.GetCommands()[y]);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if (DateTime.Now.Hour == c.GetTime() && c.hasRan == false)
+                                {
+                                    c.hasRan = true;
+                                    for (int y = 0; y < c.GetCommands().Count(); y++)
+                                    {
+                                        for (int con = 0; con < connectionList.Count; con++)
+                                        {
+                                            Connection cn = connectionList[con];
+                                            cn.SendToRcon(c.GetCommands()[y]);
+                                        }
+                                    }
+                                }
+                            }
+                            if (!c.RunEveryXMin() && DateTime.Now.Hour != c.GetTime() && c.hasRan == true)
+                            {
+                                c.hasRan = false;
+                            }
+                        }
+                    }
+
                     Invalidate();
                     Thread.Sleep(20);
                 }
@@ -965,6 +1062,11 @@ namespace RconTool
                     }
                 }
             }
+        }
+
+        private void timedCommandsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new TimedCommand().ShowDialog();
         }
     }
 }

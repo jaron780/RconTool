@@ -64,12 +64,13 @@
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\Downloads\Json100r3\Bin\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\..\Downloads\Json100r3\Bin\net45\Newtonsoft.Json.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Windows" />
     <Reference Include="System.Xml.Linq" />
@@ -82,7 +83,7 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="websocket-sharp">
-      <HintPath>..\..\..\Downloads\websocket-sharp-master\websocket-sharp-master\websocket-sharp\bin\Debug_Ubuntu\websocket-sharp.dll</HintPath>
+      <HintPath>..\..\..\..\Downloads\websocket-sharp-master\websocket-sharp-master\websocket-sharp\bin\Debug_Ubuntu\websocket-sharp.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
   </ItemGroup>
@@ -129,6 +130,20 @@
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Team.cs" />
+    <Compile Include="TimedCommand.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TimedCommand.Designer.cs">
+      <DependentUpon>TimedCommand.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TimedCommandArray.cs" />
+    <Compile Include="TimedCommandForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TimedCommandForm.Designer.cs">
+      <DependentUpon>TimedCommandForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TimedCommandItem.cs" />
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>
@@ -152,6 +167,12 @@
     </Compile>
     <EmbeddedResource Include="SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TimedCommand.resx">
+      <DependentUpon>TimedCommand.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TimedCommandForm.resx">
+      <DependentUpon>TimedCommandForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config">
       <SubType>Designer</SubType>

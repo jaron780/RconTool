@@ -165,10 +165,9 @@ namespace RconTool
 
         private void OnMessage(object sender, string message)
         {
-            if (!message.StartsWith("0.6"))
+            if (message.StartsWith("0.6"))
                 return;
             
-
             if (message.StartsWith("accept"))
             {
                 PrintToConsole("Successfully Connected to Rcon");
@@ -268,6 +267,7 @@ namespace RconTool
         public void SendToRcon(string cmd)
         {
             new Thread(delegate () {
+                if(serverConnection != null)
                 serverConnection.Command(cmd);
             }).Start();
         }
