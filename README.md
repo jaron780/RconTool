@@ -8,6 +8,7 @@ This is a tool for Server hosts to monitor and moderate their own servers.
 - View players name and service-tag
 - View and interact with chat via the chat Tab
 - View players that join and leave the server
+- Timed commands that can be sent every x minutes or at certain hours
 - Right click Context menu to Kick or ban players
 - Supports multiple servers
 - Control tab for easy access to commands you might commonly use
