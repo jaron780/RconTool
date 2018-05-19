@@ -20,6 +20,7 @@ This is a tool for Server hosts to monitor and moderate their own servers.
 - Extract the zip to folder of your choice
 - double click the exe
 - Click add server and fill in your servers info which can be found in dewrito_prefs.cfg file
+- Default ports you need for the tool are server port 11775 and rcon port 11776
 - Click save after adding all your servers
 - To switch between servers use the slider at the bottom of the program
 
