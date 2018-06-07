@@ -181,10 +181,8 @@ namespace RconTool
                 {
                     ChatMessage cm = RegexParser.ParseChat(message);
 
-                    Console.WriteLine("Message: " + cm.message);
-                    if (cm.message.StartsWith(Form1.webhookTrigger))
+                    if (Form1.webhookTrigger != "" && Form1.webhook != "" && cm.message.StartsWith(Form1.webhookTrigger))
                     {
-                        Console.WriteLine("Sending to discord");
                         SendToDiscord(message);
                     }
                     string newline = "[" + cm.date + " " + cm.time + "] " + cm.name + ": " + cm.message + "";
