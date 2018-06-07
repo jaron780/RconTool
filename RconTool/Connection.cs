@@ -1,6 +1,8 @@
 ﻿using EldoritoRcon;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading;
 
@@ -179,6 +181,12 @@ namespace RconTool
                 {
                     ChatMessage cm = RegexParser.ParseChat(message);
 
+                    Console.WriteLine("Message: " + cm.message);
+                    if (cm.message.StartsWith(Form1.webhookTrigger))
+                    {
+                        Console.WriteLine("Sending to discord");
+                        SendToDiscord(message);
+                    }
                     string newline = "[" + cm.date + " " + cm.time + "] " + cm.name + ": " + cm.message + "";
                     PrintToChat(newline);
                 }
@@ -240,6 +248,29 @@ namespace RconTool
         public void SendPM(string name, string message)
         {
             SendToRcon("Server.PM \"" + name + "\" \"" + message + "\"");
+        }
+
+        public void SendToDiscord(string message)
+        {
+
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(Form1.webhook);
+            httpWebRequest.ContentType = "application/json";
+            httpWebRequest.Method = "POST";
+
+            using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+            {
+                string json = "{\"content\":\"Player reported on " + server.serverData.name + ": "+ message + "\"}";
+                
+                streamWriter.Write(json);
+                streamWriter.Flush();
+                streamWriter.Close();
+            }
+
+            var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+            {
+                var result = streamReader.ReadToEnd();
+            }
         }
 
         private bool ListContainsPlayer(List<Player> list, Player ply)

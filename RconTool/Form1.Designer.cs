@@ -34,6 +34,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.timedCommandsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,6 +55,8 @@
             this.Host = new System.Windows.Forms.Label();
             this.ServerName = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.button12 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
@@ -74,7 +77,7 @@
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.timedCommandsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.button13 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -135,6 +138,13 @@
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
+            // 
+            // timedCommandsToolStripMenuItem
+            // 
+            this.timedCommandsToolStripMenuItem.Name = "timedCommandsToolStripMenuItem";
+            this.timedCommandsToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.timedCommandsToolStripMenuItem.Text = "Timed Commands";
+            this.timedCommandsToolStripMenuItem.Click += new System.EventHandler(this.timedCommandsToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
@@ -348,6 +358,9 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.button13);
+            this.tabPage4.Controls.Add(this.button12);
+            this.tabPage4.Controls.Add(this.button11);
             this.tabPage4.Controls.Add(this.button9);
             this.tabPage4.Controls.Add(this.button8);
             this.tabPage4.Controls.Add(this.button7);
@@ -364,6 +377,26 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Controls";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // button12
+            // 
+            this.button12.Location = new System.Drawing.Point(168, 64);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(156, 23);
+            this.button12.TabIndex = 10;
+            this.button12.Text = "Shuffle Teams";
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
+            // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(168, 6);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(156, 23);
+            this.button11.TabIndex = 9;
+            this.button11.Text = "Reload Voting Json";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // button9
             // 
@@ -561,12 +594,15 @@
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.CheckBox1_CheckedChanged);
             // 
-            // timedCommandsToolStripMenuItem
+            // button13
             // 
-            this.timedCommandsToolStripMenuItem.Name = "timedCommandsToolStripMenuItem";
-            this.timedCommandsToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
-            this.timedCommandsToolStripMenuItem.Text = "Timed Commands";
-            this.timedCommandsToolStripMenuItem.Click += new System.EventHandler(this.timedCommandsToolStripMenuItem_Click);
+            this.button13.Location = new System.Drawing.Point(168, 35);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(156, 23);
+            this.button13.TabIndex = 11;
+            this.button13.Text = "Reload Veto Json";
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
             // Form1
             // 
@@ -664,6 +700,9 @@
         private System.Windows.Forms.TabPage tabPage5;
         public System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.ToolStripMenuItem timedCommandsToolStripMenuItem;
+        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button button13;
     }
 }
 

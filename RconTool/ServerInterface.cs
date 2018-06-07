@@ -23,6 +23,9 @@ namespace RconTool
             listBox1.DisplayMember = "Ip";
             listBox1.ValueMember = "connection";
 
+            textBox1.Text = Form1.webhook;
+            textBox2.Text = Form1.webhookTrigger;
+
             AddItems();
 
             listBox1.SelectedIndex = listBox1.Items.Count - 1;
@@ -91,10 +94,32 @@ namespace RconTool
             }
             else
             {
+                Form1.webhook = textBox1.Text;
+                Form1.webhookTrigger = textBox2.Text;
                 Form1.titleOption = comboBox1.SelectedItem.ToString();
                 Form1.SaveSettings();
                 this.Close();
             }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            //webhook url
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            //webhook trigger
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -16,8 +16,10 @@ namespace RconTool
     public partial class Form1 : Form
     {
         public static Form1 form;
-        public static string toolversion = "3.7";
+        public static string toolversion = "3.8";
         public static string titleOption = "";
+        public static string webhook = "";
+        public static string webhookTrigger = "";
         private static bool autoScroll = true;
         bool autoUpdateEnabled = true;
 
@@ -191,6 +193,9 @@ namespace RconTool
 
         public static void LoadSettings()
         {
+            webhook = LoadSetting("WebhookURL");
+            webhookTrigger = LoadSetting("WebhookTrigger");
+
             titleOption = LoadSetting("titleOption");
             loadTimedCommands();
             LoadServers();
@@ -259,6 +264,9 @@ namespace RconTool
 
         public static void SaveSettings()
         {
+            SaveSetting("WebhookURL", webhook);
+            SaveSetting("WebhookTrigger", webhookTrigger);
+
             SaveSetting("TitleOption", titleOption);
             SaveServers();
             SaveTimedCommands();
@@ -1067,6 +1075,28 @@ namespace RconTool
         private void timedCommandsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new TimedCommand().ShowDialog();
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            currentConnection.SendToRcon("Server.ReloadVotingJson");
+            currentConnection.PrintToConsole("Server.ReloadVotingJson");
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            var confirmResult = MessageBox.Show("Are you sure you want to shuffle the teams?", "Warning", MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
+            {
+                currentConnection.SendToRcon("Server.ShuffleTeams");
+                currentConnection.PrintToConsole("Server.ShuffleTeams");
+            }
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            currentConnection.SendToRcon("Server.ReloadVetoJson");
+            currentConnection.PrintToConsole("Server.ReloadVetoJson");
         }
     }
 }
