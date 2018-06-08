@@ -13,6 +13,7 @@ This is a tool for Server hosts to monitor and moderate their own servers.
 - Supports multiple servers
 - Control tab for easy access to commands you might commonly use
 - Info tab to view the name and some basic settings for the server as well as the current map and game type
+- Connect to discord Webhook to send messages when a Report command is used
 
 # Instructions 
 
