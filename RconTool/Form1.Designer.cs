@@ -55,6 +55,7 @@
             this.Host = new System.Windows.Forms.Label();
             this.ServerName = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.button13 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
@@ -77,7 +78,6 @@
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.button13 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -91,19 +91,20 @@
             // 
             // textBox1
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(9, 709);
+            this.textBox1.Location = new System.Drawing.Point(9, 667);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(613, 22);
             this.textBox1.TabIndex = 0;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox1_KeyDown);
             // 
             // button1
             // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(628, 708);
+            this.button1.Location = new System.Drawing.Point(628, 667);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(66, 24);
             this.button1.TabIndex = 1;
@@ -178,7 +179,7 @@
             this.tabControl1.Location = new System.Drawing.Point(5, 394);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(751, 312);
+            this.tabControl1.Size = new System.Drawing.Size(751, 266);
             this.tabControl1.TabIndex = 4;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.TabControl1_SelectedIndexChanged);
             // 
@@ -188,7 +189,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(743, 286);
+            this.tabPage1.Size = new System.Drawing.Size(743, 240);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Console";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -205,7 +206,7 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
             this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox2.Size = new System.Drawing.Size(743, 286);
+            this.textBox2.Size = new System.Drawing.Size(743, 240);
             this.textBox2.TabIndex = 2;
             this.textBox2.TextChanged += new System.EventHandler(this.TextBox2_TextChanged);
             // 
@@ -215,7 +216,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(0);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(743, 286);
+            this.tabPage2.Size = new System.Drawing.Size(743, 240);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Chat";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -232,7 +233,7 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
             this.textBox3.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox3.Size = new System.Drawing.Size(743, 286);
+            this.textBox3.Size = new System.Drawing.Size(743, 240);
             this.textBox3.TabIndex = 5;
             this.textBox3.TextChanged += new System.EventHandler(this.TextBox3_TextChanged);
             // 
@@ -251,7 +252,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(743, 286);
+            this.tabPage3.Size = new System.Drawing.Size(743, 240);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Info";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -373,10 +374,20 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(743, 286);
+            this.tabPage4.Size = new System.Drawing.Size(743, 240);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Controls";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // button13
+            // 
+            this.button13.Location = new System.Drawing.Point(168, 35);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(156, 23);
+            this.button13.TabIndex = 11;
+            this.button13.Text = "Reload Veto Json";
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
             // button12
             // 
@@ -491,7 +502,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(743, 286);
+            this.tabPage5.Size = new System.Drawing.Size(743, 240);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Join/Leave Log";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -508,7 +519,7 @@
             this.textBox5.Name = "textBox5";
             this.textBox5.ReadOnly = true;
             this.textBox5.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox5.Size = new System.Drawing.Size(743, 286);
+            this.textBox5.Size = new System.Drawing.Size(743, 314);
             this.textBox5.TabIndex = 6;
             // 
             // statusStrip1
@@ -518,7 +529,7 @@
             this.toolStripStatusLabel2,
             this.toolStripStatusLabel3,
             this.toolStripStatusLabel4});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 764);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 724);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(761, 22);
             this.statusStrip1.SizingGrip = false;
@@ -552,9 +563,9 @@
             // 
             // button10
             // 
-            this.button10.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.button10.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
-            this.button10.Location = new System.Drawing.Point(700, 708);
+            this.button10.Location = new System.Drawing.Point(700, 667);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(53, 24);
             this.button10.TabIndex = 6;
@@ -564,8 +575,9 @@
             // 
             // trackBar1
             // 
+            this.trackBar1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.trackBar1.LargeChange = 1;
-            this.trackBar1.Location = new System.Drawing.Point(139, 736);
+            this.trackBar1.Location = new System.Drawing.Point(139, 694);
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(612, 45);
             this.trackBar1.TabIndex = 7;
@@ -573,20 +585,23 @@
             // 
             // label1
             // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(111, 736);
+            this.label1.Location = new System.Drawing.Point(111, 694);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(22, 16);
             this.label1.TabIndex = 8;
             this.label1.Text = "#1";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // checkBox1
             // 
+            this.checkBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.checkBox1.AutoSize = true;
             this.checkBox1.Checked = true;
             this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(9, 737);
+            this.checkBox1.Location = new System.Drawing.Point(9, 695);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(86, 17);
             this.checkBox1.TabIndex = 9;
@@ -594,21 +609,11 @@
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.CheckBox1_CheckedChanged);
             // 
-            // button13
-            // 
-            this.button13.Location = new System.Drawing.Point(168, 35);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(156, 23);
-            this.button13.TabIndex = 11;
-            this.button13.Text = "Reload Veto Json";
-            this.button13.UseVisualStyleBackColor = true;
-            this.button13.Click += new System.EventHandler(this.button13_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(761, 786);
+            this.ClientSize = new System.Drawing.Size(761, 746);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button10);

@@ -16,7 +16,7 @@ namespace RconTool
     public partial class Form1 : Form
     {
         public static Form1 form;
-        public static string toolversion = "3.8";
+        public static string toolversion = "3.8.5";
         public static string titleOption = "";
         public static string webhook = "";
         public static string webhookTrigger = "";
@@ -811,15 +811,16 @@ namespace RconTool
 
         private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-            if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage2"])
+            int tallheight = 290;
+            int shortHeight = 266;
+            if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage2"]) //chat
             {
                 button1.Text = "Say";
                 sendChat = true;
                 button1.Visible = true;
                 textBox1.Visible = true;
                 button10.Visible = true;
-                this.tabControl1.Size = new System.Drawing.Size(751, 312);
+                this.tabControl1.Size = new System.Drawing.Size(751, shortHeight);
             }
             else
             if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage3"])
@@ -827,7 +828,7 @@ namespace RconTool
                 button1.Visible = false;
                 textBox1.Visible = false;
                 button10.Visible = false;
-                this.tabControl1.Size = new System.Drawing.Size(751, 340);
+                this.tabControl1.Size = new System.Drawing.Size(751, tallheight);
             }
             else
             if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage4"])
@@ -835,13 +836,13 @@ namespace RconTool
                 button1.Visible = false;
                 textBox1.Visible = false;
                 button10.Visible = false;
-                this.tabControl1.Size = new System.Drawing.Size(751, 340);
+                this.tabControl1.Size = new System.Drawing.Size(751, tallheight);
             }
             else
             if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage5"])
             {
-                this.tabControl1.Size = new System.Drawing.Size(751, 340);
-                this.textBox5.Size = new System.Drawing.Size(743, 314);
+                this.tabControl1.Size = new System.Drawing.Size(751, tallheight);
+                this.textBox5.Size = new System.Drawing.Size(743, 264);
                 this.textBox5.Location = new System.Drawing.Point(0, 0);
                 button1.Visible = false;
                 textBox1.Visible = false;
@@ -854,7 +855,7 @@ namespace RconTool
                 button10.Visible = true;
                 button1.Text = "Send";
                 sendChat = false;
-                this.tabControl1.Size = new System.Drawing.Size(751, 312);
+                this.tabControl1.Size = new System.Drawing.Size(751, shortHeight);
 
             }
         }
@@ -1097,6 +1098,16 @@ namespace RconTool
         {
             currentConnection.SendToRcon("Server.ReloadVetoJson");
             currentConnection.PrintToConsole("Server.ReloadVetoJson");
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
