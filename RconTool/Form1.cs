@@ -16,7 +16,7 @@ namespace RconTool
     public partial class Form1 : Form
     {
         public static Form1 form;
-        public static string toolversion = "3.8.5";
+        public static string toolversion = "3.9";
         public static string titleOption = "";
         public static string webhook = "";
         public static string webhookTrigger = "";
@@ -1109,5 +1109,16 @@ namespace RconTool
         {
 
         }
+
+        private void generateAppConfigToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new ConfigExport().ShowDialog();
+        }
+
+        private void downloadTheAndroidAppToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://google.com");//placeholder
+        }
     }
+
 }

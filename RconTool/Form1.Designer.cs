@@ -35,6 +35,7 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timedCommandsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.generateAppConfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -78,6 +79,7 @@
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.downloadTheAndroidAppToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -128,6 +130,8 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.settingsToolStripMenuItem,
             this.timedCommandsToolStripMenuItem,
+            this.generateAppConfigToolStripMenuItem,
+            this.downloadTheAndroidAppToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -136,21 +140,28 @@
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
             // 
             // timedCommandsToolStripMenuItem
             // 
             this.timedCommandsToolStripMenuItem.Name = "timedCommandsToolStripMenuItem";
-            this.timedCommandsToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.timedCommandsToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.timedCommandsToolStripMenuItem.Text = "Timed Commands";
             this.timedCommandsToolStripMenuItem.Click += new System.EventHandler(this.timedCommandsToolStripMenuItem_Click);
+            // 
+            // generateAppConfigToolStripMenuItem
+            // 
+            this.generateAppConfigToolStripMenuItem.Name = "generateAppConfigToolStripMenuItem";
+            this.generateAppConfigToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+            this.generateAppConfigToolStripMenuItem.Text = "Generate App Config";
+            this.generateAppConfigToolStripMenuItem.Click += new System.EventHandler(this.generateAppConfigToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -609,6 +620,13 @@
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.CheckBox1_CheckedChanged);
             // 
+            // downloadTheAndroidAppToolStripMenuItem
+            // 
+            this.downloadTheAndroidAppToolStripMenuItem.Name = "downloadTheAndroidAppToolStripMenuItem";
+            this.downloadTheAndroidAppToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+            this.downloadTheAndroidAppToolStripMenuItem.Text = "Download the Android App";
+            this.downloadTheAndroidAppToolStripMenuItem.Click += new System.EventHandler(this.downloadTheAndroidAppToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -708,6 +726,8 @@
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.ToolStripMenuItem generateAppConfigToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem downloadTheAndroidAppToolStripMenuItem;
     }
 }
 
