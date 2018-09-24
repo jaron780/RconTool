@@ -117,6 +117,7 @@ namespace RconTool
             this.scoreBoardContextMenu = mnuContextMenu;
             mnuContextMenu.Items.Add("Kick", null, this.KickPlayer);
             mnuContextMenu.Items.Add("Ban", null, this.BanPlayer);
+            mnuContextMenu.Items.Add("Temp Ban", null, this.tempBanPlayer);
             mnuContextMenu.Items.Add("Copy UID", null, this.CopyUID);
             mnuContextMenu.Items.Add("Copy Name", null, this.CopyName);
             mnuContextMenu.Items.Add("Copy Name and UID", null, this.CopyNameAndUID);
@@ -176,6 +177,22 @@ namespace RconTool
                     {
                         currentConnection.PrintToConsole("Banning: " + contextplayer.Name + "/" + contextplayer.GetUid() + "");
                         currentConnection.SendToRcon("Server.KickBanUid " + contextplayer.GetUid());
+                    }
+                }
+            }
+        }
+
+        private void tempBanPlayer(object sender, System.EventArgs e)
+        {
+            if (contextplayer != null)
+            {
+                if (currentConnection.server != null)
+                {
+                    var confirmResult = MessageBox.Show("Are you sure you want to temp ban Player: " + contextplayer.Name + ":" + contextplayer.GetUid(), "Temp Ban Player", MessageBoxButtons.YesNo);
+                    if (confirmResult == DialogResult.Yes)
+                    {
+                        currentConnection.PrintToConsole("Temp Banning: " + contextplayer.Name + "/" + contextplayer.GetUid() + "");
+                        currentConnection.SendToRcon("Server.KickTempBanUid " + contextplayer.GetUid());
                     }
                 }
             }
@@ -1021,54 +1038,61 @@ namespace RconTool
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
-
+            
             scoreBoardContextMenu.Close();
             if (e.Button == MouseButtons.Right)
             {
-                mspt = e.Location;
-                int pos = 0;
-                for (int p = 0; p < 25; p++)
+                try
                 {
-                    System.Drawing.Rectangle selection = new System.Drawing.Rectangle(0, 45 + (21 * pos), 900, 21);
-
-                    if (selection.Contains(mspt))
+                    mspt = e.Location;
+                    int pos = 0;
+                    for (int p = 0; p < 25; p++)
                     {
-                        contextPlayerPos = p;
-                    }
-                    pos += 1;
-                }
+                        System.Drawing.Rectangle selection = new System.Drawing.Rectangle(0, 45 + (21 * pos), 900, 21);
 
-                if (currentConnection.server.serverData.Players.Count >= contextPlayerPos)
-                {
-                    int x = 0;
-                    for (int t = 0; t < currentConnection.server.prevteamlist.Count; t++)
-                    {
-                        Team team = currentConnection.server.prevteamlist[t];
-                        if (team != null && team.GetPlayers() != null && team.GetPlayers().Count > 0)
+                        if (selection.Contains(mspt))
                         {
-                            for (int p = 0; p < team.GetPlayers().Count; p++)
-                            {
-                                PlayerInfo ps = team.GetPlayers()[p];
-                                System.Drawing.Rectangle selection = new System.Drawing.Rectangle(0, 45 + (21 * x), 900, 20);
+                            contextPlayerPos = p;
+                        }
+                        pos += 1;
+                    }
 
-                                if (selection.Contains(mspt))
+                    if (currentConnection.server.serverData.Players.Count >= contextPlayerPos)
+                    {
+                        int x = 0;
+                        for (int t = 0; t < currentConnection.server.prevteamlist.Count; t++)
+                        {
+                            Team team = currentConnection.server.prevteamlist[t];
+                            if (team != null && team.GetPlayers() != null && team.GetPlayers().Count > 0)
+                            {
+                                for (int p = 0; p < team.GetPlayers().Count; p++)
                                 {
-                                    newContextPlayer = ps;
+                                    PlayerInfo ps = team.GetPlayers()[p];
+                                    System.Drawing.Rectangle selection = new System.Drawing.Rectangle(0, 45 + (21 * x), 900, 20);
+
+                                    if (selection.Contains(mspt))
+                                    {
+                                        newContextPlayer = ps;
+                                    }
+                                    x += 1;
                                 }
-                                x += 1;
                             }
+                        }
+
+                        contextplayer = newContextPlayer;
+
+                        if (contextplayer != null && !contextplayer.Name.Equals(""))
+                        {
+                            scoreBoardContextMenu.Items[0].Text = "&Kick " + contextplayer.Name;
+                            scoreBoardContextMenu.Items[1].Text = "&Ban " + contextplayer.Name;
+
+                            this.scoreBoardContextMenu.Show(this, new Point(e.X, e.Y));
                         }
                     }
 
-                    contextplayer = newContextPlayer;
-
-                    if (contextplayer != null && !contextplayer.Name.Equals(""))
-                    {
-                        scoreBoardContextMenu.Items[0].Text = "&Kick " + contextplayer.Name;
-                        scoreBoardContextMenu.Items[1].Text = "&Ban " + contextplayer.Name;
-
-                        this.scoreBoardContextMenu.Show(this, new Point(e.X, e.Y));
-                    }
+                }catch(Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
                 }
             }
         }
@@ -1117,7 +1141,7 @@ namespace RconTool
 
         private void downloadTheAndroidAppToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("http://google.com");//placeholder
+            System.Diagnostics.Process.Start("https://play.google.com/store/apps/details?id=jaron.rcontool.com.rcontool");
         }
     }
 
