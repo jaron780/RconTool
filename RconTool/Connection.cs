@@ -342,6 +342,7 @@ namespace RconTool
                             Player ply = new Player();
                             ply.name = server.serverData.Players[x].Name;
                             ply.uid = server.serverData.Players[x].GetUid();
+                            ply.tag = server.serverData.Players[x].serviceTag;
                             ply.timeJoined = DateTime.Now.ToString("[MM-dd-yyyy HH:mm:ss] ");
 
                             if (!ply.name.Equals(""))
@@ -360,6 +361,7 @@ namespace RconTool
                             Player ply = new Player();
                             ply.name = server.serverData.Players[x].Name;
                             ply.uid = server.serverData.Players[x].GetUid();
+                            ply.tag = server.serverData.Players[x].serviceTag;
                             ply.timeJoined = DateTime.Now.ToString("[MM-dd-yyyy HH:mm:ss] ");
 
                             if (!ply.name.Equals(""))
@@ -372,7 +374,7 @@ namespace RconTool
                             if (ListContainsPlayer(oldPlayerlist, playerlist[x]) == false)
                             {
                                 Player ply = playerlist[x];
-                                printToJoinLeave(ply.timeJoined + ply.name + " : " + ply.uid + " has Joined.");
+                                printToJoinLeave(ply.timeJoined + ply.name + " - " + ply.tag + " : " + ply.uid + " has Joined.");
                             }
                         }
 
@@ -381,7 +383,7 @@ namespace RconTool
                             if (ListContainsPlayer(playerlist, oldPlayerlist[x]) == false)
                             {
                                 Player ply = oldPlayerlist[x];
-                                printToJoinLeave(ply.timeJoined + ply.name + " : " + ply.uid + " has Left.");
+                                printToJoinLeave(ply.timeJoined + ply.name + " - " + ply.tag + " : " + ply.uid + " has Left.");
                             }
                         }
 

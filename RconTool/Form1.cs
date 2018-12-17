@@ -16,7 +16,7 @@ namespace RconTool
     public partial class Form1 : Form
     {
         public static Form1 form;
-        public static string toolversion = "3.9";
+        public static string toolversion = "4.0";
         public static string titleOption = "";
         public static string webhook = "";
         public static string webhookTrigger = "";
@@ -134,6 +134,7 @@ namespace RconTool
                     {
                         currentConnection.PrintToConsole("Kicking: " + contextplayer.Name + "/" + contextplayer.GetUid() + "");
                         currentConnection.SendToRcon("Server.KickUid " + contextplayer.GetUid());
+                        LogMessage(currentConnection.serverinfo, "Server.KickUid " + contextplayer.GetUid() + " - " + contextplayer.Name);
                     }
                 }
             }
@@ -177,6 +178,7 @@ namespace RconTool
                     {
                         currentConnection.PrintToConsole("Banning: " + contextplayer.Name + "/" + contextplayer.GetUid() + "");
                         currentConnection.SendToRcon("Server.KickBanUid " + contextplayer.GetUid());
+                        LogMessage(currentConnection.serverinfo, "Server.KickBanUid " + contextplayer.GetUid() + " - " + contextplayer.Name);
                     }
                 }
             }
@@ -193,6 +195,7 @@ namespace RconTool
                     {
                         currentConnection.PrintToConsole("Temp Banning: " + contextplayer.Name + "/" + contextplayer.GetUid() + "");
                         currentConnection.SendToRcon("Server.KickTempBanUid " + contextplayer.GetUid());
+                        LogMessage(currentConnection.serverinfo, "Server.KickTempBanUid " + contextplayer.GetUid() + " - " + contextplayer.Name);
                     }
                 }
             }
@@ -1143,6 +1146,19 @@ namespace RconTool
         {
             System.Diagnostics.Process.Start("https://play.google.com/store/apps/details?id=jaron.rcontool.com.rcontool");
         }
+
+        public static void LogMessage(ServerInfo serverinfo, string message)
+        {
+            StringBuilder sb = new StringBuilder();
+            string date = DateTime.Now.ToString("[MM-dd-yyyy HH:mm:ss] ");
+            string filename = DateTime.Now.ToString("MMddyyyyHHmm");
+
+            sb.Append(date + "[" + serverinfo.Ip + ":" + serverinfo.InfoPort + "] " + message + System.Environment.NewLine);
+
+            File.AppendAllText("log-" + filename + ".txt", sb.ToString());
+            sb.Clear();
+        }
+
     }
 
 }
