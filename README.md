@@ -25,5 +25,15 @@ This is a tool for Server hosts to monitor and moderate their own servers.
 - Click save after adding all your servers
 - To switch between servers use the slider at the bottom of the program
 
+# Mobile app
+
+Mobile app can be found on the google play store or by clicking the Download app button in the RconTool to pull up the store page.
+
+# How to export config from desktop to mobile:
+-click File -> Generate App Config
+-Copy The entire code that is generated
+-Email this code to yourself
+-Open the email from the android phone and copy paste that into the import section of the app
+
 
 Created by Jaron
