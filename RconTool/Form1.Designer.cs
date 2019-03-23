@@ -36,6 +36,7 @@
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timedCommandsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generateAppConfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.downloadTheAndroidAppToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -79,7 +80,6 @@
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.downloadTheAndroidAppToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -101,6 +101,7 @@
             this.textBox1.TabIndex = 0;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox1_KeyDown);
+            this.textBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyUp);
             // 
             // button1
             // 
@@ -157,6 +158,13 @@
             this.generateAppConfigToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.generateAppConfigToolStripMenuItem.Text = "Generate App Config";
             this.generateAppConfigToolStripMenuItem.Click += new System.EventHandler(this.generateAppConfigToolStripMenuItem_Click);
+            // 
+            // downloadTheAndroidAppToolStripMenuItem
+            // 
+            this.downloadTheAndroidAppToolStripMenuItem.Name = "downloadTheAndroidAppToolStripMenuItem";
+            this.downloadTheAndroidAppToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+            this.downloadTheAndroidAppToolStripMenuItem.Text = "Download the Android App";
+            this.downloadTheAndroidAppToolStripMenuItem.Click += new System.EventHandler(this.downloadTheAndroidAppToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
@@ -619,13 +627,6 @@
             this.checkBox1.Text = "Auto Update";
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.CheckBox1_CheckedChanged);
-            // 
-            // downloadTheAndroidAppToolStripMenuItem
-            // 
-            this.downloadTheAndroidAppToolStripMenuItem.Name = "downloadTheAndroidAppToolStripMenuItem";
-            this.downloadTheAndroidAppToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
-            this.downloadTheAndroidAppToolStripMenuItem.Text = "Download the Android App";
-            this.downloadTheAndroidAppToolStripMenuItem.Click += new System.EventHandler(this.downloadTheAndroidAppToolStripMenuItem_Click);
             // 
             // Form1
             // 

@@ -16,7 +16,7 @@ namespace RconTool
     public partial class Form1 : Form
     {
         public static Form1 form;
-        public static string toolversion = "4.0";
+        public static string toolversion = "4.1";
         public static string titleOption = "";
         public static string webhook = "";
         public static string webhookTrigger = "";
@@ -26,6 +26,9 @@ namespace RconTool
         public static List<Connection> connectionList = new List<Connection>();
         public static Connection currentConnection = null;
         public static TimedCommandArray timedCommandArray = new TimedCommandArray();
+
+        public List<string> history { get; set; }
+
 
         public static Thread RconThread;
         public static Thread tick;
@@ -43,6 +46,8 @@ namespace RconTool
 
         public Form1()
         {
+            history = new List<string>();
+
             form = this;
             InitializeComponent();
 
@@ -520,6 +525,12 @@ namespace RconTool
 
         private void Button1_Click(object sender, EventArgs e)
         {
+            if (!string.IsNullOrEmpty(textBox1.Text))
+            {
+                history.Add(textBox1.Text);
+                historyPosition = history.Count();
+            }
+
             if (sendChat)
             {
                 currentConnection.sendToChat(textBox1.Text);
@@ -533,6 +544,7 @@ namespace RconTool
                 textBox1.Clear();
 
             }
+
         }
 
         delegate void SetTrackbarCallBack();
@@ -639,6 +651,14 @@ namespace RconTool
                 e.Handled = true;
                 e.SuppressKeyPress = true;
             }
+
+            if (e.KeyCode != Keys.Down)
+                return;
+
+            if (historyPosition < history.Count-1)
+                historyPosition += 1;
+
+            textBox1.Text = history[historyPosition];
         }
 
         Color red = Color.FromArgb(155, 51, 50);
@@ -971,23 +991,27 @@ namespace RconTool
 
         private void Button10_Click(object sender, EventArgs e)
         {
-            if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage1"])
+            var confirmResult = MessageBox.Show("Are you sure you want to clear?", "Warning", MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
             {
-                currentConnection.ClearConsole();
-                ClearTextBoxs(textBox2, "");
+                if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage1"])
+                {
+                    currentConnection.ClearConsole();
+                    ClearTextBoxs(textBox2, "");
 
-            }
-            else
-            if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage2"])
-            {
-                currentConnection.ClearChat();
-                ClearTextBoxs(textBox3, "");
-            }
-            else 
-            if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage5"])
-            {
-                currentConnection.clearJoinLeave();
-                ClearTextBoxs(textBox5, "");
+                }
+                else
+                if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage2"])
+                {
+                    currentConnection.ClearChat();
+                    ClearTextBoxs(textBox3, "");
+                }
+                else 
+                if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage5"])
+                {
+                    currentConnection.clearJoinLeave();
+                    ClearTextBoxs(textBox5, "");
+                }
             }
 
         }
@@ -1159,6 +1183,19 @@ namespace RconTool
             sb.Clear();
         }
 
+        private int historyPosition = 0;
+        private void textBox1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Up)
+                return;
+
+            if (history.Count == 0)
+                return;
+
+            if (historyPosition > 0)
+            historyPosition -= 1;
+            textBox1.Text = history[historyPosition];
+        }
     }
 
 }
