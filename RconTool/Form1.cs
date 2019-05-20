@@ -16,10 +16,11 @@ namespace RconTool
     public partial class Form1 : Form
     {
         public static Form1 form;
-        public static string toolversion = "4.1";
+        public static string toolversion = "4.1.2";
         public static string titleOption = "";
         public static string webhook = "";
         public static string webhookTrigger = "";
+        public static string webhookRole = "";
         private static bool autoScroll = true;
         bool autoUpdateEnabled = true;
 
@@ -220,6 +221,7 @@ namespace RconTool
         {
             webhook = LoadSetting("WebhookURL");
             webhookTrigger = LoadSetting("WebhookTrigger");
+            webhookRole = LoadSetting("WebhookRole");
 
             titleOption = LoadSetting("titleOption");
             loadTimedCommands();
@@ -291,6 +293,7 @@ namespace RconTool
         {
             SaveSetting("WebhookURL", webhook);
             SaveSetting("WebhookTrigger", webhookTrigger);
+            SaveSetting("WebhookRole", webhookRole);
 
             SaveSetting("TitleOption", titleOption);
             SaveServers();

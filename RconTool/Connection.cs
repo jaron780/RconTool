@@ -257,7 +257,12 @@ namespace RconTool
 
             using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
             {
-                string json = "{\"content\":\"Player reported on " + server.serverData.name + ": "+ message + "\"}";
+                string roleInfo = "";
+                if (!Form1.webhookRole.Equals(""))
+                {
+                    roleInfo = "<@&" + Form1.webhookRole + "> ";
+                }
+                string json = "{\"content\":\"" + roleInfo + "Player reported on " + server.serverData.name + ": "+ message + "\"}";
                 
                 streamWriter.Write(json);
                 streamWriter.Flush();

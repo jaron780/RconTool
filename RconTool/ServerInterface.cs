@@ -25,6 +25,7 @@ namespace RconTool
 
             textBox1.Text = Form1.webhook;
             textBox2.Text = Form1.webhookTrigger;
+            textBox3.Text = Form1.webhookRole;
 
             AddItems();
 
@@ -96,6 +97,7 @@ namespace RconTool
             {
                 Form1.webhook = textBox1.Text;
                 Form1.webhookTrigger = textBox2.Text;
+                Form1.webhookRole = textBox3.Text;
                 Form1.titleOption = comboBox1.SelectedItem.ToString();
                 Form1.SaveSettings();
                 this.Close();
@@ -120,6 +122,16 @@ namespace RconTool
         private void label3_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+            //role id text box
         }
     }
 }
